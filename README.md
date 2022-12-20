@@ -24,7 +24,7 @@
 >> cd MEAformer
 >> bash run.sh
 ```
-- Using  `run.sh` file
+- Using  the bash command
 ```bash
 >> cd MEAformer
 # # w/ surface
