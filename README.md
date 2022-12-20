@@ -76,10 +76,9 @@ MEAformer
 ├── run_meaformer.sh
 ├── run.sh
 ├── src
-│   ├── data_msnea.py
-│   ├── data.py
-│   ├── distributed_utils.py
 │   ├── __init__.py
+│   ├── distributed_utils.py
+│   ├── data.py
 │   └── utils.py
 ├── torchlight
     ├── __init__.py
