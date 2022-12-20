@@ -1,12 +1,32 @@
 # MEAformer
 ![](https://img.shields.io/badge/version-1.0.1-blue)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/zjukg/DUET/blob/main/licence)
+<!-- >[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)]() -->
+
  - [*MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality Hybrid*]()
 
 <!-- >In this paper .... -->
 
-### Overall Path
-❗NOTE: Please organize your files hierarchically as follows:
+## Dependencies
+
+- Python 3
+- [PyTorch](http://pytorch.org/) (>= 1.6.0)
+- [Transformers](http://huggingface.co/transformers/) (**version 3.0.2**)
+- easydict
+- unidecode
+- tensorboard
+
+
+
+
+## Train
+```shell
+cd MEAformer
+bash run.sh
+```
+- you can open the `.sh` file for parameter or training target modification.
+
+## Dataset
+❗NOTE: Download from [GoogleDrive](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) and unzip it to make those files satisfy the following file hierarchically:
 ```
 ROOT
 ├── data
