@@ -7,7 +7,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python  main.py \
             --data_choice   $2 \
             --data_split    $3 \
             --data_rate     $4 \
-            --epoch         600 \
+            --epoch         1000 \
             --lr            5e-4  \
             --hidden_units  "300,300,300" \
             --save_model    0 \
@@ -23,7 +23,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python  main.py \
             --accumulation_steps 1 \
             --scheduler     cos \
             --il            \
-	        --il_start      250 \
+	    --il_start      500 \
             --attr_dim      300     \
             --img_dim       300     \
             --name_dim      300     \
