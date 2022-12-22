@@ -187,7 +187,7 @@ class Runner:
 
         self.best_mrr = 0
 
-        self.early_stop_init = 100
+        self.early_stop_init = 1000
         self.early_stop_count = self.early_stop_init
         self.stage = 0
 
@@ -202,7 +202,7 @@ class Runner:
                     if self.early_stop_count <= 0:
                         logger.info(f"Early stop in epoch {self.epoch}... Begin iteration....")
                     self.stage = 1
-                    self.early_stop_init = 200
+                    self.early_stop_init = 2000
                     self.early_stop_count = self.early_stop_init
 
                     self.step = 1
