@@ -102,6 +102,10 @@ def initialize_exp(params):
     # create a logger
     logger = create_logger(os.path.join(exp_folder, 'train.log'), rank=getattr(params, 'global_rank', 0))
     logger.info("============ Initialized logger ============")
+    # logger.info("\n".join("%s: %s" % (k, str(v))
+    #                       for k, v in sorted(dict(vars(params)).items())))
+    # text = f'# Git Version: {get_code_version()} #'
+    # logger.info("\n".join(['=' * 24, text, '=' * 24]))
     logger.info("The experiment will be stored in %s\n" % exp_folder)
     logger.info("Running command: %s" % command)
     logger.info("")
@@ -114,7 +118,7 @@ def get_dump_path(params):
     """
     assert len(params.exp_name) > 0
     assert not params.dump_path in ('', None), \
-        'Please choose your favorite destination for dump.'
+            'Please choose your favorite destination for dump.'
     dump_path = params.dump_path
 
     # create the sweep path if it does not exist

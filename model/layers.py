@@ -72,7 +72,7 @@ class MultiHeadGraphAttention(nn.Module):
     def forward(self, input, adj):
         output = []
         for i in range(self.n_head):
-
+            # pdb.set_trace()
             N = input.size()[0]
             edge = adj._indices()
             if self.diag:
@@ -84,16 +84,16 @@ class MultiHeadGraphAttention(nn.Module):
             edge_e = torch.exp(-self.leaky_relu(edge_h.mm(self.a_src_dst[i]).squeeze()))  # edge_e: 1 x E
             # e_rowsum: N x 1
             e_rowsum = self.special_spmm(edge, edge_e, torch.Size([N, N]), torch.ones(size=(N, 1)).cuda() if next(self.parameters()).is_cuda else torch.ones(size=(N, 1)))
-
+            # pdb.set_trace()
             edge_e = F.dropout(edge_e, self.attn_dropout, training=self.training)   # edge_e: 1 x E
 
             h_prime = self.special_spmm(edge, edge_e, torch.Size([N, N]), h)
             h_prime = h_prime.div(e_rowsum)
 
             output.append(h_prime.unsqueeze(0))
-
+        # pdb.set_trace()
         output = torch.cat(output, dim=0)
-
+        # pdb.set_trace()
         if self.bias is not None:
             return output + self.bias
         else:

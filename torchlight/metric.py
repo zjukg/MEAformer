@@ -92,23 +92,6 @@ class Top_K_Metric(Metric):
 
         return top_k_list
 
-    def batch_mr_mrr(self, predicted, true):
-        if len(true.shape) == 3:
-            true = true[0]
-        top_rank = predicted.shape[1]
-        batch_size = predicted.shape[0]
-        _, predict_ans_rank = predicted.topk(top_rank, dim=1)
-        _, real_ans = true.topk(1, dim=1)
-
-        real_ans = real_ans.expand(batch_size, top_rank)
-        ans_different = torch.abs(predict_ans_rank - real_ans)
-        _, real_ans_list = ans_different.topk(top_rank, dim=1)
-        real_ans_list = real_ans_list + 1.0
-        mr = real_ans_list[:, -1].reshape(-1, 1).to(torch.float64)
-        mrr = 1.0 / mr
-
-        return mrr, mr
-
 
 if __name__ == '__main__':
     pass

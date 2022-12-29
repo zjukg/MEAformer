@@ -32,6 +32,7 @@ class Collator_base(object):
         self.args = args
 
     def __call__(self, batch):
+        # pdb.set_trace()
 
         return np.array(batch)
 
@@ -53,7 +54,6 @@ def load_eva_data(logger, args):
     ent2id_dict, ills, triples, r_hs, r_ts, ids = read_raw_data(file_dir, lang_list)
     e1 = os.path.join(file_dir, 'ent_ids_1')
     e2 = os.path.join(file_dir, 'ent_ids_2')
-
     left_ents = get_ids(e1)
     right_ents = get_ids(e2)
     ENT_NUM = len(ent2id_dict)
@@ -116,6 +116,7 @@ def load_eva_data(logger, args):
     left_non_train = list(set(left_ents) - set(train_ill[:, 0].tolist()))
 
     right_non_train = list(set(right_ents) - set(train_ill[:, 1].tolist()))
+
     logger.info(f"#left entity : {len(left_ents)}, #right entity: {len(right_ents)}")
     logger.info(f"#left entity not in train set: {len(left_non_train)}, #right entity not in train set: {len(right_non_train)}")
 
@@ -137,7 +138,7 @@ def load_eva_data(logger, args):
     eval_ill = None
     input_idx = torch.LongTensor(np.arange(ENT_NUM))
     adj = get_adjr(ENT_NUM, triples, norm=True)
-
+    # pdb.set_trace()
     train_ill = EADataset(train_ill)
     test_ill = EADataset(test_ill)
 
@@ -158,6 +159,7 @@ def load_word2vec(path, dim=300):
     """
     glove or fasttext embedding
     """
+    # print('\n', path)
     word2vec = dict()
     err_num = 0
     err_list = []
@@ -184,7 +186,9 @@ def load_char_bigram(path):
     """
     character bigrams of translated entity names
     """
+    # load the translated entity names
     ent_names = json.load(open(path, "r"))
+    # generate the bigram dictionary
     char2id = {}
     count = 0
     for _, name in ent_names:
@@ -279,8 +283,6 @@ def visual_pivot_induction(args, left_ents, right_ents, img_features, ills, logg
     logger.info(f"visual links length: {(len(visual_links))}")
     train_ill = np.array(visual_links, dtype=np.int32)
     return train_ill
-
-# ---------- EVA ----------
 
 
 def read_raw_data(file_dir, lang=[1, 2]):
@@ -384,7 +386,7 @@ def load_attr(fns, e, ent2id, topA=1000):
                         cnt[th[i]] += 1
     fre = [(k, cnt[k]) for k in sorted(cnt, key=cnt.get, reverse=True)]
     attr2id = {}
-
+    # pdb.set_trace()
     topA = min(1000, len(fre))
     for i in range(topA):
         attr2id[fre[i][0]] = i
@@ -401,6 +403,7 @@ def load_attr(fns, e, ent2id, topA=1000):
 
 
 def load_relation(e, KG, topR=1000):
+    # (39654, 1000)
     rel_mat = np.zeros((e, topR), dtype=np.float32)
     rels = np.array(KG)[:, 1]
     top_rels = Counter(rels).most_common(topR)
@@ -427,9 +430,13 @@ def load_json_embd(path):
 
 def load_img(logger, e_num, path):
     img_dict = pickle.load(open(path, "rb"))
+    # init unknown img vector with mean and std deviation of the known's
     imgs_np = np.array(list(img_dict.values()))
     mean = np.mean(imgs_np, axis=0)
     std = np.std(imgs_np, axis=0)
+    # img_embd = np.array([np.zeros_like(img_dict[0]) for i in range(e_num)]) # no image
+    # img_embd = np.array([img_dict[i] if i in img_dict else np.zeros_like(img_dict[0]) for i in range(e_num)])
+
     img_embd = np.array([img_dict[i] if i in img_dict else np.random.normal(mean, std, mean.shape[0]) for i in range(e_num)])
     logger.info(f"{(100 * len(img_dict) / e_num):.2f}% entities have images")
     return img_embd

@@ -27,6 +27,7 @@ class MformerFusion(nn.Module):
         self.args = args
         self.modal_num = modal_num
         self.fusion_layer = nn.ModuleList([BertLayer(args) for _ in range(args.num_hidden_layers)])
+        # self.type_embedding = nn.Embedding(args.inner_view_num, args.hidden_size)
         self.type_id = torch.tensor([0, 1, 2, 3, 4, 5]).cuda()
 
     def forward(self, embs):
@@ -38,7 +39,8 @@ class MformerFusion(nn.Module):
         for i, layer_module in enumerate(self.fusion_layer):
             layer_outputs = layer_module(hidden_states, output_attentions=True)
             hidden_states = layer_outputs[0]
-
+        # torch.Size([30355, 5, 4, 4])
+        # attention_pro = layer_outputs[1]
         # torch.Size([30355, 4, 4])
         attention_pro = torch.sum(layer_outputs[1], dim=-3)
         attention_pro_comb = torch.sum(attention_pro, dim=-2) / math.sqrt(modal_num * self.args.num_attention_heads)
@@ -188,6 +190,9 @@ class BertSelfAttention(nn.Module):
 
         # Normalize the attention scores to probabilities.
         attention_probs = nn.functional.softmax(attention_scores, dim=-1)
+
+        # This is actually dropping out entire tokens to attend to, which might
+        # seem a bit unusual, but is taken from the original Transformer paper.
         # [8, 3, 8, 8]
         attention_probs = self.dropout(attention_probs)
         context_layer = torch.matmul(attention_probs, value_layer)
@@ -231,7 +236,9 @@ class BertAttention(nn.Module):
         )
 
         attention_output = self.output(self_outputs[0], hidden_states)
-        outputs = (attention_output,) + self_outputs[1:]
+        outputs = (attention_output,) + self_outputs[1:]  # add attentions if we output them
+        # attention: torch.Size([30355, 5, 4, 4])
+        # 5: head
         return outputs
 
 
@@ -281,11 +288,16 @@ class BertLayer(nn.Module):
             return (self_attention_outputs[0], self_attention_outputs[1])
 
         attention_output = self_attention_outputs[0]
+        # if decoder, the last output is tuple of self-attn cache
         outputs = self_attention_outputs[1]
+        # present_key_value = self_attention_outputs[-1]
+        # torch.Size([30355, 4, 300])
         layer_output = apply_chunking_to_forward(
             self.feed_forward_chunk, self.chunk_size_feed_forward, self.seq_len_dim, attention_output
         )
         outputs = (layer_output, outputs)
+        # if decoder, return the attn key/values as the last output
+        # outputs = outputs + (present_key_value,)
         return outputs
 
     def feed_forward_chunk(self, attention_output):

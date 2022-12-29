@@ -38,7 +38,7 @@ def set_optim(opt, model_list, freeze_part=[], accumulation_step=None):
             else:
                 p.requires_grad = False
                 freeze_layer.append((n, p))
-
+        # pdb.set_trace()
         named_parameters.extend(model_para_train)
 
     parameters = [
@@ -46,7 +46,9 @@ def set_optim(opt, model_list, freeze_part=[], accumulation_step=None):
     ]
 
     if opt.optim == 'adamw':
+        # optimizer = optim.AdamW(model.parameters(), lr=opt.lr, eps=opt.adam_epsilon)
         optimizer = optim.AdamW(parameters, lr=opt.lr, eps=opt.adam_epsilon)
+        # optimizer = AdamW(parameters, lr=opt.lr, eps=opt.adam_epsilon)
     elif opt.optim == 'adam':
         optimizer = optim.Adam(parameters, lr=opt.lr)
 
@@ -56,6 +58,7 @@ def set_optim(opt, model_list, freeze_part=[], accumulation_step=None):
         scheduler = FixedScheduler(optimizer)
     elif opt.scheduler == 'linear':
         scheduler_steps = opt.total_steps
+        # scheduler = WarmupLinearScheduler(optimizer, warmup_steps=opt.warmup_steps, scheduler_steps=scheduler_steps, min_ratio=0.)
         scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=int(opt.warmup_steps / accumulation_step), num_training_steps=int(opt.total_steps / accumulation_step))
     elif opt.scheduler == 'cos':
         scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=int(opt.warmup_steps / accumulation_step), num_training_steps=int(opt.total_steps / accumulation_step))
@@ -148,6 +151,7 @@ class Loss_log():
         return mean(self.loss)
 
     def early_stop(self):
+        # min_loss = min(self.loss)
         if self.loss[-1] > min(self.loss):
             self.flag += 1
         else:
@@ -162,6 +166,9 @@ class Loss_log():
         '''
         param output, target: should be torch Variable
         '''
+        # assert isinstance(output, torch.cuda.Tensor), 'expecting Torch Tensor'
+        # assert isinstance(target, torch.Tensor), 'expecting Torch Tensor'
+        # print(type(output))
 
         topn = max(topk)
         batch_size = output.size(0)
@@ -174,6 +181,7 @@ class Loss_log():
         ans = []
         ans_num = []
         for i in topk:
+            # is_correct_i = is_correct[:i].view(-1).float().sum(0, keepdim=True)
             is_correct_i = is_correct[:i].contiguous().view(-1).float().sum(0, keepdim=True)
             ans_num.append(int(is_correct_i.item()))
             ans.append(is_correct_i.mul_(100.0 / batch_size))
@@ -338,7 +346,9 @@ def get_adjr(ent_size, triples, norm=False):
         ind = np.array(ind, dtype=np.int32)
         val = np.array(val, dtype=np.float32)
         adj = sp.coo_matrix((val, (ind[:, 0], ind[:, 1])), shape=(ent_size, ent_size), dtype=np.float32)
-
+        # 1. normalize_adj
+        # 2. Convert a scipy sparse matrix to a torch sparse tensor
+        # pdb.set_trace()
         return sparse_mx_to_torch_sparse_tensor(normalize_adj(adj))
     else:
         M = torch.sparse_coo_tensor(torch.LongTensor(ind).t(), torch.FloatTensor(val), torch.Size([ent_size, ent_size]))
@@ -442,4 +452,6 @@ def output_device(model):
     for v in sd.values():
         if v.device not in devices:
             devices.append(v.device)
+    # for d in devices:
+    #     print(d)
     print(devices)

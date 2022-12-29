@@ -42,7 +42,6 @@ def cleanup():
 
 
 def is_dist_avail_and_initialized():
-    """检查是否支持分布式环境"""
     if not dist.is_available():
         return False
     if not dist.is_initialized():

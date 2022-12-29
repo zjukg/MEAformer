@@ -17,16 +17,13 @@ from collections import defaultdict
 from config import cfg
 from torchlight import initialize_exp, set_seed, get_dump_path
 from src.data import load_data, Collator_base, EADataset
-from src.data_msnea import load_msnea_data
 from src.utils import set_optim, Loss_log, pairwise_distances, csls_sim
 from model import MEAformer
-
 
 from src.distributed_utils import init_distributed_mode, dist_pdb, is_main_process, reduce_value, cleanup
 import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel
 import torch.nn.functional as F
-# EVA
 import scipy
 import gc
 import copy
@@ -108,10 +105,7 @@ class Runner:
         self.optimizer, self.scheduler = set_optim(opt, self.model_list, freeze_part, accumulation_step)
 
     def data_init(self):
-        if self.args.model_name != "MSNEA":
-            self.KGs, self.non_train, self.train_set, self.eval_set, self.test_set, self.test_ill_ = load_data(self.logger, self.args)
-        else:
-            self.KGs, self.non_train, self.train_set, self.eval_set, self.test_set, self.test_ill_ = load_msnea_data(self.logger, self.args)
+        self.KGs, self.non_train, self.train_set, self.eval_set, self.test_set, self.test_ill_ = load_data(self.logger, self.args)
         self.train_ill = self.train_set.data
         self.eval_left = torch.LongTensor(self.eval_set[:, 0].squeeze()).cuda()
         self.eval_right = torch.LongTensor(self.eval_set[:, 1].squeeze()).cuda()
@@ -165,11 +159,11 @@ class Runner:
             num_workers=self.args.workers,
             persistent_workers=True,  # True
             shuffle=(self.args.only_test == 0),
+            # drop_last=(self.args.only_test == 0),
             drop_last=False,
             batch_size=batch_size,
             collate_fn=collator
         )
-
         return train_dataloader
 
     def run(self):
@@ -205,6 +199,8 @@ class Runner:
                     self.early_stop_init = 2000
                     self.early_stop_count = self.early_stop_init
 
+                    self.eval_epoch = 1
+
                     self.step = 1
                     self.args.lr = self.args.lr / 5
                     self.optim_init(self.args, total_epoch=(self.args.epoch - self.args.il_start) * 3)
@@ -222,7 +218,6 @@ class Runner:
 
                 if self.stage == 1 and (self.epoch + 1) % (self.args.semi_learn_step * 10) == 0 and len(self.new_links) != 0 and self.args.il:
                     self.il_for_data_ref()
-                    # pass
 
                 self.train(_tqdm)
                 self.loss_log.update(self.curr_loss)
@@ -259,12 +254,12 @@ class Runner:
                 self.logger.info(f"[epoch {self.epoch}] #links in candidate set: {len(self.new_links)}")
 
     def il_for_data_ref(self):
-
         self.non_train["left"], self.non_train["right"], self.train_ill, self.new_links = self.model.data_refresh(
             self.logger, self.train_ill, self.test_ill_, self.non_train["left"], self.non_train["right"], new_links=self.new_links)
         set_seed(self.args.random_seed)
         self.train_set = EADataset(self.train_ill)
         self.dataloader_init(train_set=self.train_set)
+        # one time train
 
     def _save_name_define(self):
         prefix = ""
@@ -285,11 +280,9 @@ class Runner:
             loss, output = self.model(batch)
             loss = loss / accumulation_steps
             self.scaler.scale(loss).backward()
-
             if self.args.dist:
                 loss = reduce_value(loss, average=True)
             self.step += 1
-
             if not self.args.dist or is_main_process():
                 curr_loss += loss.item()
                 self.output_statistic(loss, output)
@@ -303,11 +296,9 @@ class Runner:
                 self.scaler.update()
                 skip_lr_sched = (scale > self.scaler.get_scale())
                 if not skip_lr_sched:
-
                     self.scheduler.step()
 
                 if not self.args.dist or is_main_process():
-
                     self.lr = self.scheduler.get_last_lr()[-1]
                     self.writer.add_scalars("lr", {"lr": self.lr}, self.step)
                 for model in self.model_list:
@@ -324,7 +315,6 @@ class Runner:
             return
         for key in output['loss_dic'].keys():
             self.curr_loss_dic[key] += output['loss_dic'][key]
-
         if 'weight' in output and output['weight'] is not None:
             self.weight = output['weight']
         if 'loss_weight' in output and output['loss_weight'] is not None:
@@ -352,7 +342,6 @@ class Runner:
             weight_dic["kpi"] = 1 / (self.loss_weight[1]**2)
             self.writer.add_scalars("loss_weight", weight_dic, self.step)
 
-        # init log loss
         self.curr_loss = 0.
         for key in self.curr_loss_dic:
             self.curr_loss_dic[key] = 0.
@@ -362,7 +351,6 @@ class Runner:
         test_right = self.eval_right
         self.model.eval()
         self._test(test_left, test_right, last_epoch=last_epoch, save_name=save_name)
-        # torch.cuda.empty_cache()
 
     # one time test
     def test(self, save_name="", last_epoch=True):
@@ -386,6 +374,7 @@ class Runner:
                 weight_norm = None
             final_emb = F.normalize(final_emb)
 
+        # pdb.set_trace()
         top_k = [1, 10, 50]
         acc_l2r = np.zeros((len(top_k)), dtype=np.float32)
         acc_r2l = np.zeros((len(top_k)), dtype=np.float32)
@@ -396,7 +385,6 @@ class Runner:
             distance = torch.FloatTensor(scipy.spatial.distance.cdist(
                 final_emb[test_left].cpu().data.numpy(),
                 final_emb[test_right].cpu().data.numpy(), metric="cityblock"))
-
         if self.args.csls is True:
             distance = 1 - csls_sim(1 - distance, self.args.csls_k)
 
@@ -413,7 +401,6 @@ class Runner:
             for i in range(len(top_k)):
                 if rank < top_k[i]:
                     acc_l2r[i] += 1
-            # save idx, correct rank pos, and indices
             if last_epoch:
                 indices = indices.cpu().numpy()
                 to_write.append([idx, rank, test_left_np[idx], test_right_np[idx], test_right_np[indices[0]], test_right_np[indices[1]],
@@ -433,7 +420,6 @@ class Runner:
             if weight_norm is not None:
                 wight_dic = {"all": weight_norm.cpu(), "left": weight_norm[test_left].cpu(), "right": weight_norm[test_right].cpu()}
                 with open(osp.join(save_pred_path, f"{self.args.model_name}_{self.args.data_choice}_{self.args.data_split}_{self.args.data_rate}_ep{self.args.il_start}_wight_dic.pkl"), "wb") as fp:
-
                     pickle.dump(wight_dic, fp)
 
         for idx in range(test_right.shape[0]):
@@ -484,7 +470,6 @@ class Runner:
                 self.logger.info("Random init...")
             model.cuda()
             return model
-
         if 'Dist' in self.args.model_name:
             model.load_state_dict({k.replace('module.', ''): v for k, v in torch.load(save_path, map_location=self.args.device).items()})
         else:
@@ -497,16 +482,21 @@ class Runner:
         return model
 
     def _save_model(self, model, input_name=""):
+
         model_name = self.args.model_name
+
         save_path = osp.join(self.args.data_path, model_name, 'save')
         os.makedirs(save_path, exist_ok=True)
+
         if input_name == "":
             input_name = self._save_name_define()
         save_path = osp.join(save_path, f'{input_name}.pkl')
+
         if model is None:
             return
         if self.args.save_model:
             torch.save(model.state_dict(), save_path)
+
             self.logger.info(f"saving [{save_path}] done!")
 
         return save_path
@@ -523,6 +513,7 @@ if __name__ == '__main__':
     else:
         torch.multiprocessing.set_sharing_strategy('file_system')
     rank = cfgs.rank
+    # pprint.pprint(cfgs)
 
     writer, logger = None, None
     if rank == 0:
@@ -535,6 +526,7 @@ if __name__ == '__main__':
 
     cfgs.device = torch.device(cfgs.device)
 
+    # print("print c to continue...")
     # -----  Begin ----------
     torch.cuda.set_device(cfgs.gpu)
     runner = Runner(cfgs, writer, logger, rank)

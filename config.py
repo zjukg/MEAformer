@@ -12,8 +12,6 @@ class cfg():
         # change
         self.data_root = osp.abspath(osp.join(self.this_dir, '..', '..', 'data', ''))
 
-        # TODO: add some static variable  (The frequency of change is low)
-
     def get_args(self):
         parser = argparse.ArgumentParser()
         # base
@@ -37,10 +35,9 @@ class cfg():
         # parser.add_argument("--data_rate", type=float, default=0.3, choices=[0.2, 0.3, 0.5, 0.8], help="training set rate")
 
         # TODO: add some dynamic variable
-        parser.add_argument("--model_name", default="EVA", type=str, choices=["EVA", "MCLEA", "MSNEA", "MEAformer"], help="model name")
+        parser.add_argument("--model_name", default="MEAformer", type=str, choices=["EVA", "MCLEA", "MSNEA", "MEAformer"], help="model name")
         parser.add_argument("--model_name_save", default="", type=str, help="model name for model load")
 
-        # 训练阶段
         parser.add_argument('--workers', type=int, default=8)
         parser.add_argument('--accumulation_steps', type=int, default=1)
         parser.add_argument("--scheduler", default="linear", type=str, choices=["linear", "cos", "fixed"])
@@ -49,8 +46,8 @@ class cfg():
         parser.add_argument('--weight_decay', type=float, default=0.0001)
         parser.add_argument("--adam_epsilon", default=1e-8, type=float)
         parser.add_argument('--eval_epoch', default=100, type=int, help='evaluate each n epoch')
+        parser.add_argument("--enable_sota", action="store_true", default=False)
 
-        # 可选
         parser.add_argument('--margin', default=1, type=float, help='The fixed margin in loss function. ')
         parser.add_argument('--emb_dim', default=1000, type=int, help='The embedding dimension in KGE model.')
         parser.add_argument('--adv_temp', default=1.0, type=float, help='The temperature of sampling in self-adversarial negative sampling.')
@@ -74,7 +71,6 @@ class cfg():
         # --------- MCLEA -----------
         parser.add_argument("--unsup_mode", type=str, default="img", help="unsup mode", choices=["img", "name", "char"])
         parser.add_argument("--tau", type=float, default=0.1, help="the temperature factor of contrastive loss")
-        parser.add_argument("--tau2", type=float, default=1, help="the temperature factor of alignment loss")
         parser.add_argument("--alpha", type=float, default=0.2, help="the margin of InfoMaxNCE loss")
         parser.add_argument("--with_weight", type=int, default=1, help="Whether to weight the fusion of different ")
         parser.add_argument("--structure_encoder", type=str, default="gat", help="the encoder of structure view", choices=["gat", "gcn"])
@@ -118,8 +114,13 @@ class cfg():
         parser.add_argument("--neg_triple_num", type=int, default=1, help="neg triple num")
         parser.add_argument("--use_bert", type=int, default=0)
         parser.add_argument("--use_attr_value", type=int, default=0)
+        # parser.add_argument("--learning_rate", type=int, default=0.001)
+        # parser.add_argument("--optimizer", type=str, default="Adam")
+        # parser.add_argument("--max_epoch", type=int, default=200)
 
-        # ------------ DDP ------------
+        # parser.add_argument("--save_path", type=str, default="save_pkl", help="save path")
+
+        # ------------ Para ------------
         parser.add_argument('--rank', type=int, default=0, help='rank to dist')
         parser.add_argument('--dist', type=int, default=0, help='whether to dist')
         parser.add_argument('--device', default='cuda', help='device id (i.e. 0 or 0,1 or cpu)')
@@ -135,7 +136,7 @@ class cfg():
         # e.g. cannot save and test at the same time
         assert not (self.cfg.save_model and self.cfg.only_test)
 
-        # TODO: update some dynamic variable
+        # update some dynamic variable
         self.cfg.data_root = self.data_root
 
         if self.cfg.use_surface:
@@ -166,23 +167,27 @@ class cfg():
             self.save_model = 0
             self.dist = 0
 
-        if self.cfg.model_name not in ["MEAformer", "MSNEA", "EVA", "MCLEA"]:
-            if (self.cfg.data_choice == "DBP15K" and (self.cfg.w_name or self.cfg.w_char)):
-
-                self.cfg.epoch = min(800, self.cfg.epoch)
-                self.cfg.il_start = min(500, self.cfg.il_start)
-                self.cfg.eval_epoch = min(50, self.cfg.eval_epoch)
-
-            if self.cfg.attr_dim >= 300:
-                self.cfg.epoch = min(1000, self.cfg.epoch)
-                self.cfg.il_start = min(500, self.cfg.il_start)
-                self.cfg.eval_epoch = min(50, self.cfg.eval_epoch)
-
         # --------- MSNEA -----------
         self.cfg.dim = self.cfg.attr_dim
 
         # --------- MEAformer -----------
         self.cfg.max_position_embeddings = self.cfg.inner_view_num + 1
         assert self.cfg.hidden_size == self.cfg.attr_dim
+
+        # use SOTA param
+        if self.cfg.enable_sota:
+            if self.cfg.il:
+                self.cfg.eval_epoch = max(2, self.cfg.eval_epoch)
+                self.cfg.weight_decay = max(0.0005, self.cfg.weight_decay)
+                if self.cfg.data_rate > 0.5:
+                    self.cfg.weight_decay = max(0.001, self.cfg.weight_decay)
+                if self.cfg.data_choice == "DBP15K":
+                    if not self.cfg.use_surface:
+                        self.cfg.weight_decay = max(0.001, self.cfg.weight_decay)
+            else:
+                if self.cfg.data_choice == "DBP15K" or "FBYG" in self.cfg.data_choice:
+                    self.cfg.epoch = 250
+                else:
+                    self.cfg.epoch = 500
 
         return self.cfg

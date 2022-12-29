@@ -33,7 +33,9 @@ class MEAformer(nn.Module):
             self.char_features = kgs["char_features"].cuda()
 
         img_dim = self._get_img_dim(kgs)
+
         char_dim = kgs["char_features"].shape[1] if self.char_features is not None else 100
+
         self.multimodal_encoder = MultiModalEncoder(args=self.args,
                                                     ent_num=kgs["ent_num"],
                                                     img_feature_dim=img_dim,
@@ -47,11 +49,11 @@ class MEAformer(nn.Module):
 
         tmp = -1 * torch.ones(self.input_idx.shape[0], dtype=torch.int64).cuda()
         self.replay_matrix = torch.stack([self.input_idx, tmp], dim=1).cuda()
-
         self.replay_ready = 0
         self.idx_one = torch.ones(self.args.batch_size, dtype=torch.int64).cuda()
         self.idx_double = torch.cat([self.idx_one, self.idx_one]).cuda()
         self.last_num = 1000000000000
+        # self.idx_one = np.ones(self.args.batch_size, dtype=np.int64)
 
     def forward(self, batch):
         gph_emb, img_emb, rel_emb, att_emb, name_emb, char_emb, joint_emb, hidden_states = self.joint_emb_generat(only_joint=False)
@@ -71,7 +73,6 @@ class MEAformer(nn.Module):
                 neg_r_list = list(neg_r_set - all_ent_set)
                 neg_l_ipt = torch.tensor(neg_l_list, dtype=torch.int64).cuda()
                 neg_r_ipt = torch.tensor(neg_r_list, dtype=torch.int64).cuda()
-
                 loss_joi, l_neg, r_neg = self.criterion_cl_joint(joint_emb, batch, neg_l_ipt, neg_r_ipt)
 
             index = (
@@ -84,7 +85,6 @@ class MEAformer(nn.Module):
             if self.replay_ready == 0:
                 num = torch.sum(self.replay_matrix < 0)
                 if num == self.last_num:
-                    # 不再增加
                     self.replay_ready = 1
                     print("-----------------------------------------")
                     print("begin replay!")
@@ -96,7 +96,9 @@ class MEAformer(nn.Module):
 
         in_loss = self.inner_view_loss(gph_emb, rel_emb, att_emb, img_emb, name_emb, char_emb, batch)
         out_loss = self.inner_view_loss(gph_emb_hid, rel_emb_hid, att_emb_hid, img_emb_hid, name_emb_hid, char_emb_hid, batch)
+
         loss_all = loss_joi + in_loss + out_loss
+
         loss_dic = {"joint_Intra_modal": loss_joi.item(), "Intra_modal": in_loss.item()}
         output = {"loss_dic": loss_dic, "emb": joint_emb}
         return loss_all, output
@@ -118,7 +120,7 @@ class MEAformer(nn.Module):
         return gph_emb, rel_emb, att_emb, img_emb, name_emb, char_emb, joint_emb
 
     def inner_view_loss(self, gph_emb, rel_emb, att_emb, img_emb, name_emb, char_emb, train_ill):
-
+        # pdb.set_trace()
         loss_GCN = self.criterion_cl(gph_emb, train_ill) if gph_emb is not None else 0
         loss_rel = self.criterion_cl(rel_emb, train_ill) if rel_emb is not None else 0
         loss_att = self.criterion_cl(att_emb, train_ill) if att_emb is not None else 0
@@ -169,6 +171,7 @@ class MEAformer(nn.Module):
             new_links = [(left_non_train[i], right_non_train[p]) for i, p in enumerate(preds_l) if preds_r[p] == i]
         else:
             new_links = [(left_non_train[i], right_non_train[p]) for i, p in enumerate(preds_l) if (preds_r[p] == i) and ((left_non_train[i], right_non_train[p]) in new_links)]
+
         return new_links
 
     def data_refresh(self, logger, train_ill, test_ill_, left_non_train, right_non_train, new_links=[]):
@@ -176,6 +179,7 @@ class MEAformer(nn.Module):
             new_links_select = new_links
             train_ill = np.vstack((train_ill, np.array(new_links_select)))
             num_true = len([nl for nl in new_links_select if nl in test_ill_])
+            # remove from left/right_non_train
             for nl in new_links_select:
                 left_non_train.remove(nl[0])
                 right_non_train.remove(nl[1])
