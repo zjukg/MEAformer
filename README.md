@@ -8,47 +8,71 @@
 
 ## Dependencies
 
-- Python 3
+- Python (>= 3.7)
 - [PyTorch](http://pytorch.org/) (>= 1.6.0)
-- [Transformers](http://huggingface.co/transformers/) (**version 3.0.2**)
-- easydict
-- unidecode
-- tensorboard
+- numpy (>= 1.19.2)
+- [Transformers](http://huggingface.co/transformers/) (>= 4.21.3)
+- easydict (>= 1.10)
+- unidecode (>= 1.3.6)
+- tensorboard (>= 2.11.0)
 
 
 
 
 ## Train
-- Using  `run.sh` file
+- Using  script file (`run.sh`)
 ```bash
 >> cd MEAformer
 >> bash run.sh
 ```
-- Using  the bash command
+- Using the `bash command`
 ```bash
 >> cd MEAformer
-# # w/ surface
-# DBP15K
->> bash run_meaformer.sh 0 DBP15K zh_en 0.3 1 
->> bash run_meaformer.sh 0 DBP15K ja_en 0.3 1 
->> bash run_meaformer.sh 0 DBP15K fr_en 0.3 1 
-
-# # w/o surface
-# DBP15K
->> bash run_meaformer.sh 0 DBP15K zh_en 0.3 0 
->> bash run_meaformer.sh 0 DBP15K ja_en 0.3 0 
->> bash run_meaformer.sh 0 DBP15K fr_en 0.3 0
-# FBYG15K
->> bash run_meaformer.sh 0 FBYG15K norm 0.8 0 
->> bash run_meaformer.sh 0 FBYG15K norm 0.5 0 
->> bash run_meaformer.sh 0 FBYG15K norm 0.2 0 
+# -----------------------
+# ------ iterative ------
+# -----------------------
+# ----  w/o surface  ---- 
 # FBDB15K
->> bash run_meaformer.sh 0 FBDB15K norm 0.8 0 
->> bash run_meaformer.sh 0 FBDB15K norm 0.5 0 
->> bash run_meaformer.sh 0 FBDB15K norm 0.2 0 
+>> bash run_meaformer.sh 1 FBDB15K norm 0.8 0 
+>> bash run_meaformer.sh 1 FBDB15K norm 0.5 0 
+>> bash run_meaformer.sh 1 FBDB15K norm 0.2 0 
+# FBYG15K
+>> bash run_meaformer.sh 1 FBYG15K norm 0.8 0 
+>> bash run_meaformer.sh 1 FBYG15K norm 0.5 0 
+>> bash run_meaformer.sh 1 FBYG15K norm 0.2 0 
+# DBP15K
+>> bash run_meaformer.sh 1 DBP15K zh_en 0.3 0 
+>> bash run_meaformer.sh 1 DBP15K ja_en 0.3 0 
+>> bash run_meaformer.sh 1 DBP15K fr_en 0.3 0
+# ----  w/ surface  ---- 
+# DBP15K
+>> bash run_meaformer.sh 1 DBP15K zh_en 0.3 1 
+>> bash run_meaformer.sh 1 DBP15K ja_en 0.3 1 
+>> bash run_meaformer.sh 1 DBP15K fr_en 0.3 1
+# -----------------------
+# ---- non-iterative ----
+# -----------------------
+# ----  w/o surface  ---- 
+# FBDB15K
+>> bash run_meaformer_il.sh 1 FBDB15K norm 0.8 0 
+>> bash run_meaformer_il.sh 1 FBDB15K norm 0.5 0 
+>> bash run_meaformer_il.sh 1 FBDB15K norm 0.2 0 
+# FBYG15K
+>> bash run_meaformer_il.sh 1 FBYG15K norm 0.8 0 
+>> bash run_meaformer_il.sh 1 FBYG15K norm 0.5 0 
+>> bash run_meaformer_il.sh 1 FBYG15K norm 0.2 0 
+# DBP15K
+>> bash run_meaformer_il.sh 1 DBP15K zh_en 0.3 0 
+>> bash run_meaformer_il.sh 1 DBP15K ja_en 0.3 0 
+>> bash run_meaformer_il.sh 1 DBP15K fr_en 0.3 0
+# ----  w/ surface  ---- 
+# DBP15K
+>> bash run_meaformer_il.sh 1 DBP15K zh_en 0.3 1 
+>> bash run_meaformer_il.sh 1 DBP15K ja_en 0.3 1 
+>> bash run_meaformer_il.sh 1 DBP15K fr_en 0.3 1
 ```
 
-❗Tips: you can open the `run_meaformer.sh` file for parameter or training target modification.
+❗Tips: you can open the `run_meaformer.sh` or `run_meaformer_il.sh` file for parameter or training target modification.
 
 ## Dataset
 ❗NOTE: Download from [GoogleDrive](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) (1.26G) and unzip it to make those files satisfy the following file hierarchically:
@@ -65,26 +89,27 @@ ROOT
 MEAformer
 ├── config.py
 ├── main.py
-├── model
-│   ├── __init__.py
-│   ├── layers.py
-│   ├── MEAformer_loss.py
-│   ├── MEAformer.py
-│   ├── MEAformer_tools.py
-│   └── Tool_model.py
 ├── requirement.txt
 ├── run_meaformer.sh
+├── run_meaformer_il.sh
 ├── run.sh
+├── model
+│   ├── __init__.py
+│   ├── layers.py
+│   ├── MEAformer_loss.py
+│   ├── MEAformer.py
+│   ├── MEAformer_tools.py
+│   └── Tool_model.py
 ├── src
-│   ├── __init__.py
-│   ├── distributed_utils.py
-│   ├── data.py
-│   └── utils.py
-├── torchlight
-    ├── __init__.py
-    ├── logger.py
-    ├── metric.py
-    └── utils.py
+│   ├── __init__.py
+│   ├── distributed_utils.py
+│   ├── data.py
+│   └── utils.py
+└── torchlight
+    ├── __init__.py
+    ├── logger.py
+    ├── metric.py
+    └── utils.py
 ```
 
 
