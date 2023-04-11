@@ -9,7 +9,10 @@
 <!-- >In this paper .... -->
 
 ## 🔬 Dependencies
-
+```bash
+pip install -r requirement.txt
+```
+### Details
 - Python (>= 3.7)
 - [PyTorch](http://pytorch.org/) (>= 1.6.0)
 - numpy (>= 1.19.2)
