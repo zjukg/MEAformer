@@ -2,7 +2,7 @@
 ![](https://img.shields.io/badge/version-1.0.1-blue)
 <!-- >[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)]() -->
 
- - [*MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality Hybrid*]()
+ - [*MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality Hybrid*](https://arxiv.org/abs/2212.14454)
 
 <!-- >In this paper .... -->
 
