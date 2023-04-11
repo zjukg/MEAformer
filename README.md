@@ -27,7 +27,7 @@
 >> cd MEAformer
 >> bash run.sh
 ```
-- Using the `bash command`
+- **Optional**: Using the `bash command`
 ```bash
 >> cd MEAformer
 # -----------------------
