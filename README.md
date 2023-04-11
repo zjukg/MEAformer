@@ -1,6 +1,8 @@
 # MEAformer
 ![](https://img.shields.io/badge/version-1.0.1-blue)
-<!-- >[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)]() -->
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/zjukg/MEAformer/blob/main/licence)
+[![arxiv badge](https://img.shields.io/badge/arxiv-2212.14454-red)](https://arxiv.org/abs/2212.14454)
+[![Pytorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?e&logo=PyTorch&logoColor=white)](https://pytorch.org/)
 
  - [*MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality Hybrid*](https://arxiv.org/abs/2212.14454)
 
