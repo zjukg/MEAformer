@@ -29,7 +29,7 @@
 ```bash
 >> cd MEAformer
 # -----------------------
-# ------ iterative ------
+# ---- non-iterative ----
 # -----------------------
 # ----  w/o surface  ---- 
 # FBDB15K
@@ -50,7 +50,7 @@
 >> bash run_meaformer.sh 1 DBP15K ja_en 0.3 1 
 >> bash run_meaformer.sh 1 DBP15K fr_en 0.3 1
 # -----------------------
-# ---- non-iterative ----
+# ------ iterative ------
 # -----------------------
 # ----  w/o surface  ---- 
 # FBDB15K
