@@ -6,7 +6,7 @@
 
 <!-- >In this paper .... -->
 
-## Dependencies
+## 🔬 Dependencies
 
 - Python (>= 3.7)
 - [PyTorch](http://pytorch.org/) (>= 1.6.0)
@@ -19,7 +19,7 @@
 
 
 
-## Train
+## 🚀 Train
 - Using  script file (`run.sh`)
 ```bash
 >> cd MEAformer
@@ -74,7 +74,7 @@
 
 ❗Tips: you can open the `run_meaformer.sh` or `run_meaformer_il.sh` file for parameter or training target modification.
 
-## Dataset
+## 📚 Dataset
 ❗NOTE: Download from [GoogleDrive](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) (1.26G) and unzip it to make those files satisfy the following file hierarchically:
 ```
 ROOT
@@ -177,4 +177,28 @@ mmkg
 │   └── zh_en_GA_id_img_feature_dict.pkl
 ├── MEAformer
 └── dump
+```
+
+## Cite:
+Please condiser citing this paper if you use the ```code``` or ```data``` from our work.
+Thanks a lot :)
+
+```bigquery
+@article{DBLP:journals/corr/abs-2212-14454,
+  author    = {Zhuo Chen and
+               Jiaoyan Chen and
+               Wen Zhang and
+               Lingbing Guo and
+               Yin Fang and
+               Yufeng Huang and
+               Yuxia Geng and
+               Jeff Z. Pan and
+               Wenting Song and
+               Huajun Chen},
+  title     = {MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality
+               Hybrid},
+  journal   = {CoRR},
+  volume    = {abs/2212.14454},
+  year      = {2022}
+}
 ```
