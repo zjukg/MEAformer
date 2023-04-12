@@ -25,7 +25,7 @@ pip install -r requirement.txt
 
 
 ## 🚀 Train
-- Using  script file (`run.sh`)
+- **Quick start**: Using  script file (`run.sh`)
 ```bash
 >> cd MEAformer
 >> bash run.sh
@@ -80,7 +80,7 @@ pip install -r requirement.txt
 ❗Tips: you can open the `run_meaformer.sh` or `run_meaformer_il.sh` file for parameter or training target modification.
 
 ## 📚 Dataset
-❗NOTE: Download from [GoogleDrive](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) (1.26G) and unzip it to make those files satisfy the following file hierarchically:
+❗NOTE: Download from [GoogleDrive](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) (1.26G) and unzip it to make those files **satisfy the following file hierarchically**:
 ```
 ROOT
 ├── data
@@ -207,3 +207,7 @@ Thanks a lot :)
   year      = {2022}
 }
 ```
+
+## 💡 Acknowledgement
+
+We appreciate [MCLEA](https://github.com/lzxlin/MCLEA), [MSNEA](https://github.com/liyichen-cly/MSNEA), [EVA](https://github.com/cambridgeltl/eva), [MMEA](https://github.com/liyichen-cly/MMEA) and many other related works for their open-source contributions.
