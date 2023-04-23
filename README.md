@@ -6,6 +6,10 @@
 
  - [*MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality Hybrid*](https://arxiv.org/abs/2212.14454)
 
+## 🔔 News
+
+- **2023-4-23 We release the complete code and data for [MEAformer](https://github.com/zjukg/MEAformer) !**
+
 <!-- >In this paper .... -->
 
 ## 🔬 Dependencies
