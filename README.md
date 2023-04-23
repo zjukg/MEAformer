@@ -8,7 +8,7 @@
 
 ## 🔔 News
 
-- **2023-4-24 We release the complete code and data for [MEAformer](https://github.com/zjukg/MEAformer) !**
+- **2023-4-24 We release the complete code and [data]((https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing)) for [MEAformer](https://github.com/zjukg/MEAformer) !**
 
 <!-- >In this paper .... -->
 
