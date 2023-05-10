@@ -84,7 +84,7 @@ pip install -r requirement.txt
 ❗Tips: you can open the `run_meaformer.sh` or `run_meaformer_il.sh` file for parameter or training target modification.
 
 ## 📚 Dataset
-❗NOTE: Download from [GoogleDrive](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) (1.26G) and unzip it to make those files **satisfy the following file hierarchically**:
+❗NOTE: Download from [GoogleDrive](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) (1.26G) and unzip it to make those files **satisfy the following file hierarchy**:
 ```
 ROOT
 ├── data
