@@ -3,6 +3,7 @@
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/zjukg/MEAformer/blob/main/licence)
 [![arxiv badge](https://img.shields.io/badge/arxiv-2212.14454-red)](https://arxiv.org/abs/2212.14454)
 [![Pytorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?e&logo=PyTorch&logoColor=white)](https://pytorch.org/)
+[![ACMMM](https://img.shields.io/badge/ACM%20MM-2023-%23bd9f65?labelColor=%233d4cac&color=%23dd2167)](https://www.acmmm2023.org/)
 
  - [*MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality Hybrid*](https://arxiv.org/abs/2212.14454)
 >This paper introduces MEAformer, a multi-modal entity alignment transformer approach for meta modality hybrid, which dynamically predicts the mutual correlation coefficients among modalities for more fine-grained entity-level modality fusion and alignment.
@@ -12,7 +13,7 @@
 </div>
 
 ## 🔔 News
-- **`2023-7` We release the [Repo](https://github.com/zjukg/UMAEA) for our paper: `Rethinking Uncertainly Missing and Ambiguous Visual Modality in Multi-Modal Entity Alignment`**. 
+- **`2023-7` We release the [Repo](https://github.com/zjukg/UMAEA) for our paper: `Rethinking Uncertainly Missing and Ambiguous Visual Modality in Multi-Modal Entity Alignment` !** 
 - **`2023-5` We preprint our paper [`Revisit and Outstrip Entity Alignment: A Perspective of Generative Models`](https://arxiv.org/abs/2305.14651) !**
 - **`2023-4` We release the complete code and [data](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) for [MEAformer](https://github.com/zjukg/MEAformer) !**
 
