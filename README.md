@@ -200,7 +200,7 @@ Please condiser citing this paper if you use the ```code``` or ```data``` from o
 Thanks a lot :)
 
 ```bigquery
-@article{DBLP:journals/corr/abs-2212-14454,
+@inproceedings{chen2023meaformer,
   author    = {Zhuo Chen and
                Jiaoyan Chen and
                Wen Zhang and
@@ -211,11 +211,10 @@ Thanks a lot :)
                Jeff Z. Pan and
                Wenting Song and
                Huajun Chen},
-  title     = {MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality
-               Hybrid},
-  journal   = {CoRR},
-  volume    = {abs/2212.14454},
-  year      = {2022}
+  title     = {MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality Hybrid},
+  booktitle    = {{ACM} Multimedia},
+  publisher    = {{ACM}},
+  year         = {2023}
 }
 ```
 
