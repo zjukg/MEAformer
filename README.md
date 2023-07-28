@@ -217,7 +217,6 @@ Thanks a lot :)
                Yichi Zhang and
                Yuxia Geng and
                Jeff Z. Pan and
-               Wenting Song and
                Huajun Chen and
                Wen Zhang},
   title     = {MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality Hybrid},
