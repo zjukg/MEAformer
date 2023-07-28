@@ -211,7 +211,6 @@ Thanks a lot :)
 @inproceedings{chen2023meaformer,
   author    = {Zhuo Chen and
                Jiaoyan Chen and
-               Wen Zhang and
                Lingbing Guo and
                Yin Fang and
                Yufeng Huang and
@@ -219,7 +218,8 @@ Thanks a lot :)
                Yuxia Geng and
                Jeff Z. Pan and
                Wenting Song and
-               Huajun Chen},
+               Huajun Chen and
+               Wen Zhang},
   title     = {MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality Hybrid},
   booktitle    = {{ACM} Multimedia},
   publisher    = {{ACM}},
