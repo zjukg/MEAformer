@@ -211,14 +211,15 @@ Thanks a lot :)
 @inproceedings{chen2023meaformer,
   author    = {Zhuo Chen and
                Jiaoyan Chen and
+               Wen Zhang and
                Lingbing Guo and
                Yin Fang and
                Yufeng Huang and
                Yichi Zhang and
                Yuxia Geng and
                Jeff Z. Pan and
-               Huajun Chen and
-               Wen Zhang},
+               Wenting Song and
+               Huajun Chen},
   title     = {MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality Hybrid},
   booktitle    = {{ACM} Multimedia},
   publisher    = {{ACM}},
