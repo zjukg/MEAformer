@@ -90,6 +90,18 @@ pip install -r requirement.txt
 
 ❗Tips: you can open the `run_meaformer.sh` or `run_meaformer_il.sh` file for parameter or training target modification.
 
+## 🎯 Results
+
+$\bf{H@1}$ Performance with the Settings: **`w/o surface & Non-iterative`**. We modified part of the [MSNEA](https://github.com/liyichen-cly/MSNEA) to involve not using the content of attribute values but only the attribute types themselves (See [issues](https://github.com/zjukg/MEAformer/issues/3) for details):
+| Method | $\bf{DBP15K_{ZH-EN}}$ | $\bf{DBP15K_{JA-EN}}$ | $\bf{DBP15K_{FR-EN}}$ |
+|:------------------:|:----------------:|:----------------:|:----------------:|
+|        [MSNEA](https://github.com/liyichen-cly/MSNEA)          |    .648     |     .541     |      .557     |
+|        [EVA](https://github.com/cambridgeltl/eva)          |    .683     |     .669    |      .686     |
+|        [MCLEA](https://github.com/lzxlin/mclea)          |    .726     |     .719     |      .719     |
+|        [MEAformer]()         |    **.772**     |     **.764**     |      **.771**     |
+|        [UMAEA](https://github.com/zjukg/umaea)         |    **.800**     |     **.801**     |      **.818**     |
+
+
 ## 📚 Dataset
 ❗NOTE: Download from [GoogleDrive](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) (1.26G) and unzip it to make those files **satisfy the following file hierarchy**:
 ```
