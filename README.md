@@ -92,10 +92,10 @@ pip install -r requirement.txt
 
 ## 🎯 Results
 
-$\bf{H@1}$ Performance with the Settings: **`w/o surface & Non-iterative`**. We modified part of the [MSNEA](https://github.com/liyichen-cly/MSNEA) to involve not using the content of attribute values but only the attribute types themselves (See [issues](https://github.com/zjukg/MEAformer/issues/3) for details):
+$\bf{H@1}$ Performance with the Settings: **`w/o surface & Non-iterative`** in **[UMAEA](https://github.com/zjukg/umaea)**. We modified part of the [MSNEA](https://github.com/liyichen-cly/MSNEA) to involve not using the content of attribute values but only the attribute types themselves (See [issues](https://github.com/zjukg/MEAformer/issues/3) for details):
 | Method | $\bf{DBP15K_{ZH-EN}}$ | $\bf{DBP15K_{JA-EN}}$ | $\bf{DBP15K_{FR-EN}}$ |
 |:------------------:|:----------------:|:----------------:|:----------------:|
-|        [MSNEA](https://github.com/liyichen-cly/MSNEA)          |    .648     |     .541     |      .557     |
+|        [MSNEA](https://github.com/liyichen-cly/MSNEA)          |    .609     |     .541     |      .557     |
 |        [EVA](https://github.com/cambridgeltl/eva)          |    .683     |     .669    |      .686     |
 |        [MCLEA](https://github.com/lzxlin/mclea)          |    .726     |     .719     |      .719     |
 |        [MEAformer](https://github.com/zjukg/MEAformer)         |    **.772**     |     **.764**     |      **.771**     |
