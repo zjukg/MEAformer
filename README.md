@@ -8,9 +8,11 @@
  - [*MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality Hybrid*](https://arxiv.org/abs/2212.14454)
 >This paper introduces MEAformer, a multi-modal entity alignment transformer approach for meta modality hybrid, which dynamically predicts the mutual correlation coefficients among modalities for more fine-grained entity-level modality fusion and alignment.
 
-<div align="center">
+<!--<div align="center">
     <img src="https://github.com/zjukg/MEAformer/blob/main/IMG/MEAformer.jpg" width="95%" height="auto" />
-</div>
+</div> -->
+
+[![MEAformer](https://github.com/zjukg/MEAformer/blob/main/IMG/MEAformer.jpg)](https://youtu.be/5Kjzg0EPavI "MEAformer")
 
 ## 🔔 News
 - **`2023-10` We preprint our paper [`Universal Multi-modal Entity Alignment via Iteratively Fusing Modality Similarity Paths`](https://arxiv.org/abs/2310.05364) !**
