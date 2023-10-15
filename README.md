@@ -13,6 +13,7 @@
 </div> -->
 
 [![MEAformer](https://github.com/zjukg/MEAformer/blob/main/IMG/MEAformer.jpg)](https://youtu.be/5Kjzg0EPavI "MEAformer")
+<p align="center"><i><b>👆 Click to see the Video</b></i></p>
 
 ## 🔔 News
 - **`2023-10` We preprint our paper [`Universal Multi-modal Entity Alignment via Iteratively Fusing Modality Similarity Paths`](https://arxiv.org/abs/2310.05364) !**
