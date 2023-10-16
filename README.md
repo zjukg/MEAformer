@@ -16,10 +16,10 @@
 <p align="center"><i><b>👆 Click to see the Video</b></i></p>
 
 ## 🔔 News
-- **`2023-10` We preprint our paper [`Universal Multi-modal Entity Alignment via Iteratively Fusing Modality Similarity Paths`](https://arxiv.org/abs/2310.05364) !**
-- **`2023-7` We release the [Repo](https://github.com/zjukg/UMAEA) for our paper: [`Rethinking Uncertainly Missing and Ambiguous Visual Modality in Multi-Modal Entity Alignment`](https://arxiv.org/abs/2307.16210) !** 
-- **`2023-5` We preprint our paper [`Revisit and Outstrip Entity Alignment: A Perspective of Generative Models`](https://arxiv.org/abs/2305.14651) !**
-- **`2023-4` We release the complete code and [data](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) for [MEAformer](https://github.com/zjukg/MEAformer) !**
+- **`2023-10` We preprint our paper [Universal Multi-modal Entity Alignment via Iteratively Fusing Modality Similarity Paths](https://arxiv.org/abs/2310.05364) !**
+- **`2023-7` We release the [[Repo](https://github.com/zjukg/UMAEA)] for our paper: [Rethinking Uncertainly Missing and Ambiguous Visual Modality in Multi-Modal Entity Alignment](https://arxiv.org/abs/2307.16210) ! [[`Slide`](https://github.com/zjukg/UMAEA/blob/main/Slide/Chen-ISWC-2023.pdf)]** 
+- **`2023-5` We preprint our paper [Revisit and Outstrip Entity Alignment: A Perspective of Generative Models](https://arxiv.org/abs/2305.14651) !**
+- **`2023-4` We release the complete code and [data](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) for [MEAformer](https://github.com/zjukg/MEAformer) ! [[`Slide`](https://github.com/zjukg/MEAformer/blob/main/Slide/MEAformer-Slide.pdf)] [[`Vedio`](https://youtu.be/5Kjzg0EPavI)]**
 
 <!-- >In this paper .... -->
 
