@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/zjukg/MEAformer/blob/main/IMG/MEAformer.png" alt="Logo" width="600">
+  <img src="https://github.com/zjukg/MEAformer/blob/main/IMG/MEAformer.png" alt="Logo" width="500">
 </div>
 
 
