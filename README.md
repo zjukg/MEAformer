@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/zjukg/MEAformer/blob/main/IMG/MEAformer4.png" alt="Logo" width="600">
+  <img src="https://github.com/zjukg/MEAformer/blob/main/IMG/MEAformer4.png" alt="Logo" width="500">
 </div>
 
 # 🏖️ [MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality Hybrid](https://arxiv.org/abs/2212.14454)
