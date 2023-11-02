@@ -227,20 +227,22 @@ Please condiser citing this paper if you use the ```code``` or ```data``` from o
 Thanks a lot :)
 
 ```bigquery
-@inproceedings{chen2023meaformer,
-  author    = {Zhuo Chen and
-               Jiaoyan Chen and
-               Wen Zhang and
-               Lingbing Guo and
-               Yin Fang and
-               Yufeng Huang and
-               Yichi Zhang and
-               Yuxia Geng and
-               Jeff Z. Pan and
-               Wenting Song and
-               Huajun Chen},
-  title     = {MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality Hybrid},
+@inproceedings{DBLP:conf/mm/ChenCZGFHZGPSC23,
+  author       = {Zhuo Chen and
+                  Jiaoyan Chen and
+                  Wen Zhang and
+                  Lingbing Guo and
+                  Yin Fang and
+                  Yufeng Huang and
+                  Yichi Zhang and
+                  Yuxia Geng and
+                  Jeff Z. Pan and
+                  Wenting Song and
+                  Huajun Chen},
+  title        = {MEAformer: Multi-modal Entity Alignment Transformer for Meta Modality
+                  Hybrid},
   booktitle    = {{ACM} Multimedia},
+  pages        = {3317--3327},
   publisher    = {{ACM}},
   year         = {2023}
 }
