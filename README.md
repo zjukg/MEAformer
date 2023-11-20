@@ -110,7 +110,7 @@ $\bf{H@1}$ Performance with the Settings: **`w/o surface & Non-iterative`** in *
 
 
 ## 📚 Dataset
-❗NOTE: Download from [GoogleDrive](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) (1.26G) and unzip it to make those files **satisfy the following file hierarchy**:
+- ❗NOTE: Download from [GoogleDrive](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) (1.26G) and unzip it to make those files **satisfy the following file hierarchy**:
 ```
 ROOT
 ├── data
@@ -118,8 +118,8 @@ ROOT
 └── code
     └── MEAformer
 ```
-
-**`Optional`** The raw images of entities appeared in DBP15k can be downloaded from [dropbox](https://www.dropbox.com/sh/rnvtnjhymbu8wh0/AACONryOmrNvoCkir2R8Dwxha?dl=0) (108GB after unzipping, see [EVA](https://github.com/cambridgeltl/eva) for details). All images are saved as title-image pairs in dictionaries and can be accessed with the following code :
+- Case analysis Jupyter script: [GoogleDrive](https://drive.google.com/file/d/1AUTo7FhzvRYTsLTrDFOW1NVbsTFlGraM/view?usp=sharing) (**180M**) base on the raw images of entities (need to be unzip). I hope this gives you a good understanding of this dataset.
+- **`Optional`** The raw images of entities appeared in DBP15k can be downloaded from [dropbox](https://www.dropbox.com/sh/rnvtnjhymbu8wh0/AACONryOmrNvoCkir2R8Dwxha?dl=0) (**108GB** after unzipping, see [EVA](https://github.com/cambridgeltl/eva) for details). All images are saved as title-image pairs in dictionaries and can be accessed with the following code :
 ```python
 import pickle
 zh_images = pickle.load(open("eva_image_resources/dbp15k/zh_dbp15k_link_img_dict_full.pkl",'rb'))
