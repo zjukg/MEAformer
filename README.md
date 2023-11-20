@@ -119,7 +119,7 @@ ROOT
     └── MEAformer
 ```
 
-**`Optional`** The raw images of entities appeared in DBP15k and DWY15k can be downloaded from [dropbox](https://www.dropbox.com/sh/rnvtnjhymbu8wh0/AACONryOmrNvoCkir2R8Dwxha?dl=0) (108GB after unzipping). All images are saved as title-image pairs in dictionaries and can be accessed with the following code:
+**`Optional`** The raw images of entities appeared in DBP15k can be downloaded from [dropbox](https://www.dropbox.com/sh/rnvtnjhymbu8wh0/AACONryOmrNvoCkir2R8Dwxha?dl=0) (108GB after unzipping, see [EVA](https://github.com/cambridgeltl/eva) for details). All images are saved as title-image pairs in dictionaries and can be accessed with the following code :
 ```python
 import pickle
 zh_images = pickle.load(open("eva_image_resources/dbp15k/zh_dbp15k_link_img_dict_full.pkl",'rb'))
