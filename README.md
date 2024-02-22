@@ -19,6 +19,7 @@
 <p align="center"><i><b>👆 Click to see the Video</b></i></p>
 
 ## 🔔 News
+- **`2024-02` We preprint our Paper [ASGEA: Exploiting Logic Rules from Align-Subgraphs for Entity Alignment](https://arxiv.org/abs/2402.11000).**
 - **`2024-02` We preprint our Survey [Knowledge Graphs Meet Multi-Modal Learning: A Comprehensive Survey](http://arxiv.org/abs/2402.05391)  [[`Repo`](https://github.com/zjukg/KG-MM-Survey)].**
 - **`2024-01` Our paper [Revisit and Outstrip Entity Alignment: A Perspective of Generative Models](https://arxiv.org/abs/2305.14651) is accepted by ICLR 2024 !**
 - **`2023-10` We preprint our paper [Universal Multi-modal Entity Alignment via Iteratively Fusing Modality Similarity Paths](https://arxiv.org/abs/2310.05364) !**
