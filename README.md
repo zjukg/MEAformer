@@ -20,6 +20,8 @@
 
 ## 🔔 News
 - **`2024-02` We preprint our Survey [Knowledge Graphs Meet Multi-Modal Learning: A Comprehensive Survey](http://arxiv.org/abs/2402.05391)  [[`Repo`](https://github.com/zjukg/KG-MM-Survey)].**
+- **`2024-02` We release the [[`Repo`](https://github.com/zjukg/AdaMF-MAT)] for our paper [Unleashing the Power of Imbalanced Modality Information for Multi-modal Knowledge Graph Completion
+](https://arxiv.org/pdf/2402.15444v1.pdf), COLING 2024**
 - **`2024-02` We preprint our Paper [ASGEA: Exploiting Logic Rules from Align-Subgraphs for Entity Alignment](https://arxiv.org/abs/2402.11000) [[`Repo`](https://github.com/lyyf2002/ASGEA)].**
 - **`2024-01` Our paper [Revisit and Outstrip Entity Alignment: A Perspective of Generative Models](https://arxiv.org/abs/2305.14651) [[Repo](https://github.com/zjukg/GEEA)] is accepted by ICLR 2024 !**
 - **`2023-10` We preprint our paper [Universal Multi-modal Entity Alignment via Iteratively Fusing Modality Similarity Paths](https://arxiv.org/abs/2310.05364) !**
