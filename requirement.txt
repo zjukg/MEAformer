@@ -1,4 +1,4 @@
 easydict
 unidecode
 tensorboard
-transformers
+transformers==4.21.3
