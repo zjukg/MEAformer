@@ -38,7 +38,7 @@ pip install -r requirement.txt
 - Python (>= 3.7)
 - [PyTorch](http://pytorch.org/) (>= 1.6.0)
 - numpy (>= 1.19.2)
-- [Transformers](http://huggingface.co/transformers/) (>= 4.21.3)
+- [Transformers](http://huggingface.co/transformers/) (== 4.21.3)
 - easydict (>= 1.10)
 - unidecode (>= 1.3.6)
 - tensorboard (>= 2.11.0)
