@@ -19,12 +19,12 @@
 <p align="center"><i><b>👆 Click to see the Video</b></i></p>
 
 ## 🔔 News
+- **`2024-03` Our paper [NativE: Multi-modal Knowledge Graph Completion in the Wild](https://www.techrxiv.org/doi/full/10.36227/techrxiv.171259566.60211714)  [[`Repo`](https://github.com/zjukg/NATIVE)] is accepted by SIGIR 2024 !.**
 - **`2024-02` We preprint our Survey [Knowledge Graphs Meet Multi-Modal Learning: A Comprehensive Survey](http://arxiv.org/abs/2402.05391)  [[`Repo`](https://github.com/zjukg/KG-MM-Survey)].**
 - **`2024-02` We release the [[`Repo`](https://github.com/zjukg/AdaMF-MAT)] for our paper [Unleashing the Power of Imbalanced Modality Information for Multi-modal Knowledge Graph Completion
 ](https://arxiv.org/pdf/2402.15444v1.pdf), COLING 2024**
 - **`2024-02` We preprint our Paper [ASGEA: Exploiting Logic Rules from Align-Subgraphs for Entity Alignment](https://arxiv.org/abs/2402.11000) [[`Repo`](https://github.com/lyyf2002/ASGEA)].**
 - **`2024-01` Our paper [Revisit and Outstrip Entity Alignment: A Perspective of Generative Models](https://arxiv.org/abs/2305.14651) [[Repo](https://github.com/zjukg/GEEA)] is accepted by ICLR 2024 !**
-- **`2023-10` We preprint our paper [Universal Multi-modal Entity Alignment via Iteratively Fusing Modality Similarity Paths](https://arxiv.org/abs/2310.05364) !**
 - **`2023-07` We release the [[Repo](https://github.com/zjukg/UMAEA)] for our paper: [Rethinking Uncertainly Missing and Ambiguous Visual Modality in Multi-Modal Entity Alignment](https://arxiv.org/abs/2307.16210) ! [[`Slide`](https://github.com/zjukg/UMAEA/blob/main/Slide/Chen-ISWC-2023.pdf)], ISWC 2023** 
 - **`2023-04` We release the complete code and [data](https://drive.google.com/file/d/1VIWcc3KDcLcRImeSrF2AyhetBLq_gsnx/view?usp=sharing) for [MEAformer](https://github.com/zjukg/MEAformer) ! [[`Slide`](https://github.com/zjukg/MEAformer/blob/main/Slide/MEAformer-Slide.pdf)] [[`Vedio`](https://youtu.be/5Kjzg0EPavI)], ACM MM 2023**
 
