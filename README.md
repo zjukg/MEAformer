@@ -124,7 +124,6 @@ ROOT
 ```
 - Case analysis Jupyter script: [GoogleDrive](https://drive.google.com/file/d/1AUTo7FhzvRYTsLTrDFOW1NVbsTFlGraM/view?usp=sharing) (**180M**) base on the raw images of entities (need to be unzip). I hope this gives you a good understanding of this dataset.
 - **[ Option ]** The raw **Relations** & **Attributes** appeared in DBP15k and case from **MEAformer** can be downloaded from [`Baidu Cloud Drive`](https://pan.baidu.com/s/18ZFWzHnAtPTfVlVqt6J9QA ) (**150M**) with the pass code **`mmea`**.
-- **[ Option ]** DBP15K Raw data: [`Baidu Cloud Drive`](https://pan.baidu.com/s/12naBGpkfFluq66ytBXmAvA?pwd=mmkg) (**142M**) with the pass code **`mmkg`**
 - **[ Option ]** The raw **images** of entities appeared in DBP15k can be downloaded from [`Baidu Cloud Drive`](https://pan.baidu.com/s/1nRpSLJtTUEXDD4cgfSZZQQ) (**50GB**) with the pass code **`mmea`**. All images are saved as title-image pairs in dictionaries and can be accessed with the following code :
 ```python
 import pickle
